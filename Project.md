@@ -1,4 +1,4 @@
-# Project Overview: Game Library & Wishlist App
+# Project Overview: BeeList (Game Library & Wishlist)
 
 ## 1. Project Goal
 Build a serverless web application that allows users to create accounts, search for video games, and add them to custom lists (Library or Wishlist). The app must be highly concurrent, handling at least 100 simultaneous users without degrading performance, and utilizing exclusively free-tier services.

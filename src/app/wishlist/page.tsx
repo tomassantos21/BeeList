@@ -3,7 +3,6 @@ import { redirect } from "next/navigation";
 import { createClient } from "@/lib/supabase/server";
 import { GameCard } from "@/components/GameCard";
 import { UserGame } from "@/types/database";
-import { Bookmark, Plus, Search } from "lucide-react";
 
 export default async function WishlistPage() {
   const supabase = await createClient();
@@ -29,33 +28,25 @@ export default async function WishlistPage() {
   const games = (data as UserGame[]) || [];
 
   return (
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+    <div className="max-w-6xl mx-auto px-4 sm:px-6 py-8">
       {/* Header */}
-      <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-8">
+      <div className="flex items-center justify-between mb-6 pb-3 border-b border-neutral-900">
         <div>
-          <div className="flex items-center gap-2.5">
-            <div className="w-10 h-10 rounded-xl bg-amber-500/20 text-amber-400 border border-amber-500/30 flex items-center justify-center">
-              <Bookmark className="w-5 h-5" />
-            </div>
-            <h1 className="text-3xl font-extrabold tracking-tight text-white">My Wishlist</h1>
-          </div>
-          <p className="text-neutral-400 text-sm mt-1">
-            Keep track of upcoming releases and games you want to play next.
-          </p>
+          <h1 className="text-xl font-semibold tracking-tight text-white">Wishlist</h1>
+          <p className="text-neutral-500 text-xs mt-0.5">{games.length} games queued</p>
         </div>
 
         <Link
           href="/search"
-          className="inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-amber-500 hover:bg-amber-400 font-medium text-sm text-neutral-950 transition shadow-lg shadow-amber-500/20 w-full sm:w-auto"
+          className="text-xs px-3 py-1.5 rounded-md bg-neutral-900 hover:bg-neutral-800 text-neutral-300 border border-neutral-800 transition"
         >
-          <Plus className="w-4 h-4" />
-          <span>Find More Games</span>
+          + Find games
         </Link>
       </div>
 
-      {/* Wishlist Grid */}
+      {/* Grid */}
       {games.length > 0 ? (
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
           {games.map((game) => (
             <GameCard
               key={game.id}
@@ -68,18 +59,10 @@ export default async function WishlistPage() {
           ))}
         </div>
       ) : (
-        <div className="text-center py-20 bg-neutral-900/40 border border-neutral-800 rounded-3xl p-8 max-w-lg mx-auto">
-          <Bookmark className="w-12 h-12 text-neutral-600 mx-auto mb-3" />
-          <h3 className="text-lg font-bold text-white mb-1">Your wishlist is empty</h3>
-          <p className="text-neutral-400 text-sm mb-6">
-            Search for games and add them to your wishlist to plan your next adventures.
-          </p>
-          <Link
-            href="/search"
-            className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-amber-500 hover:bg-amber-400 font-medium text-sm text-neutral-950 transition shadow-lg shadow-amber-500/20"
-          >
-            <Search className="w-4 h-4" />
-            <span>Search Games</span>
+        <div className="text-center py-20 text-neutral-500 text-sm">
+          Your wishlist is empty.{" "}
+          <Link href="/search" className="text-neutral-300 underline underline-offset-4">
+            Search games to queue up
           </Link>
         </div>
       )}

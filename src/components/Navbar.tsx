@@ -1,7 +1,6 @@
 import Link from "next/link";
 import { createClient } from "@/lib/supabase/server";
 import { logout } from "@/app/auth/actions";
-import { Gamepad2, Library, Bookmark, Search, LogOut, LogIn } from "lucide-react";
 
 export async function Navbar() {
   let user = null;
@@ -10,68 +9,62 @@ export async function Navbar() {
     const { data } = await supabase.auth.getUser();
     user = data.user;
   } catch {
-    // If Supabase env is not yet set up, gracefully render unauthenticated navbar
+    // Unauthenticated fallback
   }
 
   return (
-    <header className="sticky top-0 z-50 w-full border-b border-neutral-800 bg-neutral-950/80 backdrop-blur-md">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-16">
+    <header className="sticky top-0 z-50 w-full border-b border-neutral-900 bg-neutral-950/80 backdrop-blur-sm">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6">
+        <div className="flex items-center justify-between h-14">
           {/* Logo */}
-          <Link href="/" className="flex items-center gap-2.5 group">
-            <div className="w-10 h-10 rounded-xl bg-violet-600/20 border border-violet-500/30 flex items-center justify-center text-violet-400 group-hover:scale-105 transition">
-              <Gamepad2 className="w-5 h-5" />
-            </div>
-            <span className="font-bold text-lg tracking-tight text-white">
-              Game<span className="text-violet-500">Vault</span>
+          <Link href="/" className="flex items-center gap-2 font-bold tracking-tight text-white hover:opacity-90 transition">
+            <span className="w-2 h-2 rounded-full bg-amber-400" />
+            <span className="text-base tracking-tight">
+              Bee<span className="text-neutral-400">List</span>
             </span>
           </Link>
 
-          {/* Nav Links */}
-          <nav className="flex items-center gap-1 sm:gap-2">
+          {/* Navigation */}
+          <nav className="flex items-center gap-5 text-sm">
             <Link
               href="/search"
-              className="flex items-center gap-1.5 px-3 py-2 rounded-lg text-sm font-medium text-neutral-300 hover:text-white hover:bg-neutral-900 transition"
+              className="text-neutral-400 hover:text-white transition-colors"
             >
-              <Search className="w-4 h-4 text-neutral-400" />
-              <span>Search</span>
+              Search
             </Link>
 
             {user && (
               <>
                 <Link
                   href="/library"
-                  className="flex items-center gap-1.5 px-3 py-2 rounded-lg text-sm font-medium text-neutral-300 hover:text-white hover:bg-neutral-900 transition"
+                  className="text-neutral-400 hover:text-white transition-colors"
                 >
-                  <Library className="w-4 h-4 text-neutral-400" />
-                  <span>Library</span>
+                  Library
                 </Link>
 
                 <Link
                   href="/wishlist"
-                  className="flex items-center gap-1.5 px-3 py-2 rounded-lg text-sm font-medium text-neutral-300 hover:text-white hover:bg-neutral-900 transition"
+                  className="text-neutral-400 hover:text-white transition-colors"
                 >
-                  <Bookmark className="w-4 h-4 text-neutral-400" />
-                  <span>Wishlist</span>
+                  Wishlist
                 </Link>
               </>
             )}
           </nav>
 
-          {/* Auth Actions */}
-          <div className="flex items-center gap-3">
+          {/* User state */}
+          <div className="flex items-center gap-3 text-xs">
             {user ? (
               <div className="flex items-center gap-3">
-                <span className="hidden md:inline text-xs text-neutral-400 truncate max-w-[160px]">
+                <span className="hidden sm:inline text-neutral-500 font-mono">
                   {user.email}
                 </span>
                 <form action={logout}>
                   <button
                     type="submit"
-                    className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium text-neutral-300 hover:text-white bg-neutral-900 hover:bg-neutral-800 border border-neutral-800 transition"
+                    className="text-neutral-400 hover:text-white px-2.5 py-1 rounded-md border border-neutral-800 hover:border-neutral-700 transition"
                   >
-                    <LogOut className="w-3.5 h-3.5" />
-                    <span>Sign Out</span>
+                    Sign out
                   </button>
                 </form>
               </div>
@@ -79,16 +72,15 @@ export async function Navbar() {
               <div className="flex items-center gap-2">
                 <Link
                   href="/login"
-                  className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium text-neutral-300 hover:text-white hover:bg-neutral-900 transition"
+                  className="text-neutral-400 hover:text-white px-2.5 py-1 transition"
                 >
-                  <LogIn className="w-3.5 h-3.5" />
-                  <span>Sign In</span>
+                  Sign in
                 </Link>
                 <Link
                   href="/signup"
-                  className="px-3 py-1.5 rounded-lg text-xs font-medium text-white bg-violet-600 hover:bg-violet-500 transition shadow-sm"
+                  className="px-3 py-1 rounded-md bg-white text-neutral-950 font-medium hover:bg-neutral-200 transition"
                 >
-                  Sign Up
+                  Sign up
                 </Link>
               </div>
             )}

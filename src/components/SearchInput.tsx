@@ -32,25 +32,23 @@ export function SearchInput({ initialQuery = "" }: { initialQuery?: string }) {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="relative w-full max-w-2xl mx-auto">
+    <form onSubmit={handleSubmit} className="relative w-full max-w-xl mx-auto">
       <div className="relative flex items-center">
-        <div className="absolute left-4 pointer-events-none text-neutral-400">
+        <div className="absolute left-3.5 pointer-events-none text-neutral-500">
           {isPending ? (
-            <Loader2 className="w-5 h-5 animate-spin text-violet-400" />
+            <Loader2 className="w-4 h-4 animate-spin text-neutral-400" />
           ) : (
-            <Search className="w-5 h-5" />
+            <Search className="w-4 h-4" />
           )}
         </div>
         <input
           type="text"
           value={value}
-          onChange={(e) => {
-            setValue(e.target.value);
-          }}
-          placeholder="Search games (e.g. Witcher 3, Elden Ring, Hollow Knight)..."
-          className="w-full pl-12 pr-24 py-4 rounded-2xl bg-neutral-900 border border-neutral-800 text-white placeholder-neutral-500 text-base focus:outline-none focus:ring-2 focus:ring-violet-500/50 shadow-xl transition"
+          onChange={(e) => setValue(e.target.value)}
+          placeholder="Search games..."
+          className="w-full pl-10 pr-20 py-2.5 rounded-lg bg-neutral-900/60 border border-neutral-800 text-sm text-neutral-200 placeholder-neutral-500 focus:outline-none focus:border-neutral-600 transition"
         />
-        <div className="absolute right-3 flex items-center gap-1.5">
+        <div className="absolute right-2 flex items-center gap-1">
           {value && (
             <button
               type="button"
@@ -58,15 +56,15 @@ export function SearchInput({ initialQuery = "" }: { initialQuery?: string }) {
                 setValue("");
                 handleSearch("");
               }}
-              className="p-1.5 rounded-lg text-neutral-400 hover:text-white hover:bg-neutral-800 transition"
-              title="Clear search"
+              className="p-1 rounded text-neutral-500 hover:text-neutral-300 transition"
+              title="Clear"
             >
-              <X className="w-4 h-4" />
+              <X className="w-3.5 h-3.5" />
             </button>
           )}
           <button
             type="submit"
-            className="px-3.5 py-2 rounded-xl bg-violet-600 hover:bg-violet-500 font-medium text-xs text-white transition shadow"
+            className="px-2.5 py-1 rounded bg-neutral-800 hover:bg-neutral-700 text-xs text-neutral-200 font-medium transition"
           >
             Search
           </button>
