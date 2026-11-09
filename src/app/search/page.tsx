@@ -1,5 +1,5 @@
 import { Suspense } from "react";
-import { searchGames } from "@/lib/rawg";
+import { searchGames } from "@/lib/igdb";
 import { getUserGames } from "@/app/actions/games";
 import { createClient } from "@/lib/supabase/server";
 import { SearchInput } from "@/components/SearchInput";
@@ -45,7 +45,7 @@ export default async function SearchPage({ searchParams }: SearchPageProps) {
 
       {rawgError && (
         <div className="max-w-xl mx-auto mb-6 p-3 rounded-lg border border-neutral-800 bg-neutral-900/50 text-xs text-neutral-400">
-          <span className="text-amber-400 font-medium">Notice:</span> {rawgError} Configure <code className="text-neutral-300">RAWG_API_KEY</code> in <code className="text-neutral-300">.env.local</code>.
+          <span className="text-amber-400 font-medium">Notice:</span> {rawgError} Configure <code className="text-neutral-300">TWITCH_CLIENT_ID</code> and <code className="text-neutral-300">TWITCH_CLIENT_SECRET</code> in <code className="text-neutral-300">.env.local</code>.
         </div>
       )}
 

@@ -20,7 +20,7 @@ export default function RootLayout({
         <footer className="border-t border-neutral-900/60 py-6 text-center text-xs text-neutral-600">
           <div className="max-w-6xl mx-auto px-4 flex items-center justify-between">
             <span className="font-medium text-neutral-500">BeeList</span>
-            <span>Powered by RAWG API</span>
+            <span>Powered by IGDB</span>
           </div>
         </footer>
       </body>

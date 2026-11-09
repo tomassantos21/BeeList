@@ -1,4 +1,4 @@
-import { searchGames } from "@/lib/rawg";
+import { searchGames } from "@/lib/igdb";
 import { getUserGames } from "@/app/actions/games";
 import { createClient } from "@/lib/supabase/server";
 import { SearchInput } from "@/components/SearchInput";
